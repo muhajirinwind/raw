@@ -5,8 +5,7 @@ wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add
 sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 sudo add-apt-repository ppa:webupd8team/java -y
 sudo apt-get update
-echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
-sudo apt-get install oracle-java8-installer -y
+sudo apt-get install openjdk-11-jre-headless -y
 sudo apt-get install jenkins -y
 
 # Docker
@@ -30,7 +29,7 @@ chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 
 # Configure access
-usermod -aG docker jenkins
-usermod -aG docker azureuser
+sudo usermod -aG docker jenkins
+sudo usermod -aG docker azureuser
 sudo touch /var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
-service jenkins restart
+sudo service jenkins restart
